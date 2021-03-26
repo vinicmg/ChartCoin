@@ -2,4 +2,5 @@
     <string name="app_name">ChartCoin</string>
     <string name="chartcoin_splash_name">ChartCoin</string>
     <string name="splash_screen_image">splash_screen_image</string>
+    <string name="bitcoin_defaultValue">U$ 0,00</string>
 </resources>

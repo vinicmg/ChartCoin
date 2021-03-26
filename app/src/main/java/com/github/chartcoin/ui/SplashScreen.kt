@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.github.chartcoin.MainActivity
 import com.github.chartcoin.R
 
 class SplashScreen : AppCompatActivity() {
@@ -14,12 +13,12 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        callSplashScreen()
+        callHomeScreen()
     }
 
-    private fun callSplashScreen() {
+    private fun callHomeScreen() {
         Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }, TIME_OUT)
     }
