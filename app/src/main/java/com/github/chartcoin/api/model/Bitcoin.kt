@@ -1,8 +1,8 @@
 package com.github.chartcoin.api.model
 
-import java.util.*
+import java.time.LocalDateTime
 
 data class Bitcoin(
-    val x: Date,
+    val x: LocalDateTime,
     val y: Double
 )

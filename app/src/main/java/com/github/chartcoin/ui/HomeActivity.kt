@@ -13,7 +13,7 @@ class HomeActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
+                .replace(R.id.container, HomeFragment())
                 .commitNow()
         }
     }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88017f07d7cd00e3894e63894d286c8c/jetified-AAChartCore-Kotlin--SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88017f07d7cd00e3894e63894d286c8c/jetified-AAChartCore-Kotlin--SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88017f07d7cd00e3894e63894d286c8c/jetified-AAChartCore-Kotlin--SNAPSHOT/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.AAChartModel/AAChartCore-Kotlin/-SNAPSHOT/8187d16c3d3ef4649dd1666986b8d874f7bed7b8/AAChartCore-Kotlin--SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

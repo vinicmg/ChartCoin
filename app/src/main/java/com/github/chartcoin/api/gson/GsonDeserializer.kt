@@ -4,18 +4,21 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import java.lang.reflect.Type
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
-class GsonDeserializer : JsonDeserializer<Date> {
+class GsonDeserializer : JsonDeserializer<LocalDateTime> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): Date {
+    ): LocalDateTime {
         return if (json != null) {
-            Date(json.asJsonPrimitive.asLong * 1000)
+            LocalDateTime.ofInstant(Instant.ofEpochSecond(json.asJsonPrimitive.asLong), TimeZone.getDefault().toZoneId())
         } else {
-            Date()
+            LocalDateTime.now()
         }
     }
 }

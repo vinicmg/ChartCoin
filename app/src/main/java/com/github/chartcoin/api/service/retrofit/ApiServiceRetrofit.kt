@@ -6,11 +6,12 @@ import com.github.chartcoin.api.service.BitcoinService
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDateTime
 import java.util.*
 
 object ApiServiceRetrofit {
 
-    val gson = GsonBuilder().registerTypeAdapter(Date::class.java, GsonDeserializer()).create()
+    val gson = GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, GsonDeserializer()).create()
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
