@@ -10,8 +10,7 @@ import java.util.*
 
 object ApiServiceRetrofit {
 
-    val gson = GsonBuilder().registerTypeAdapter(Date::class.java, GsonDeserializer())
-        .setDateFormat("yyyy-MM-dd HH:mm:ss").create()
+    val gson = GsonBuilder().registerTypeAdapter(Date::class.java, GsonDeserializer()).create()
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

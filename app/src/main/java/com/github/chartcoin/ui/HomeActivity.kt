@@ -3,8 +3,7 @@ package com.github.chartcoin.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.chartcoin.R
-import com.github.chartcoin.api.service.retrofit.ApiServiceRetrofit
-import com.github.chartcoin.ui.ui.main.HomeFragment
+import com.github.chartcoin.ui.main.HomeFragment
 
 class HomeActivity : AppCompatActivity() {
 

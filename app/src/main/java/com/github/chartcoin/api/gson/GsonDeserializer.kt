@@ -12,10 +12,10 @@ class GsonDeserializer : JsonDeserializer<Date> {
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): Date {
-        if (json != null) {
-            return Date(json.asJsonPrimitive.asLong * 1000)
+        return if (json != null) {
+            Date(json.asJsonPrimitive.asLong * 1000)
         } else {
-            return Date()
+            Date()
         }
     }
 }
