@@ -3,6 +3,6 @@ package com.github.chartcoin.api.model
 import java.util.*
 
 data class Bitcoin(
-    val x: Long,
+    val x: Date,
     val y: Double
 )
