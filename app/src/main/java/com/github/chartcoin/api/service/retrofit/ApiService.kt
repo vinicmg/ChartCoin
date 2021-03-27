@@ -1,7 +1,7 @@
 package com.github.chartcoin.api.service.retrofit
 
-import com.github.chartcoin.api.BASE_URL_BITCOIN
-import com.github.chartcoin.api.BASE_URL_CURRENCY
+import com.github.chartcoin.api.service.BASE_URL_BITCOIN
+import com.github.chartcoin.api.service.BASE_URL_CURRENCY
 import com.github.chartcoin.api.gson.GsonDeserializer
 import com.github.chartcoin.api.service.BitcoinService
 import com.github.chartcoin.api.service.CurrencyService

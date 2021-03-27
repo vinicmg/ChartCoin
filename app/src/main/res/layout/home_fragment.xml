@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.HomeFragment">
@@ -14,6 +15,7 @@
         <ProgressBar
             android:id="@+id/progressBarDestaque"
             style="?android:attr/progressBarStyle"
+            android:progressTint="@color/medium_orange"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginTop="36dp"
@@ -43,6 +45,7 @@
                 android:layout_marginStart="24dp"
                 android:background="#fafff7"
                 app:singleLine="true"
+                app:selectionRequired="true"
                 app:singleSelection="true">
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -76,7 +79,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardDestaque"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginHorizontal="24dp"
                 app:cardCornerRadius="8dp"
@@ -86,6 +89,7 @@
                     android:id="@+id/viewTotalConfirmed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -103,6 +107,19 @@
                         android:text="@string/bitcoin_defaultValue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="@string/varia_o_da_moeda" />
+                    <TextView
+                        android:id="@+id/valorVariacao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="@string/string_porcentagem" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

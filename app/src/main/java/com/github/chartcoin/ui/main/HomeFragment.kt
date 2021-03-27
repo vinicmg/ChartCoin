@@ -17,6 +17,8 @@ import com.github.chartcoin.data.dto.BitcoinPricesDto
 import com.github.chartcoin.data.dto.CoinCurrencysDto
 import com.github.chartcoin.data.response.ApiResponse
 import kotlinx.android.synthetic.main.home_fragment.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
 
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
 
     private var moeda : Double = 1.0
     private var cotacaoAtual: Double = 0.0
+    private var variacaoBitcoin: String = ""
     private lateinit var currencysDto : CoinCurrencysDto
 
     override fun onCreateView(
@@ -76,6 +79,7 @@ class HomeFragment : Fragment() {
         }
 
         valorBitcoinDestaque.text = formatCurrency.format(cotacaoAtual * moeda)
+        valorVariacao.text = variacaoBitcoin
     }
 
     private fun getPrices() {
@@ -96,6 +100,9 @@ class HomeFragment : Fragment() {
         val lastPosition = prices.values.size - 1
 
         cotacaoAtual = prices.values[lastPosition].y
+        val df = DecimalFormat("#,##%")
+        df.roundingMode= RoundingMode.CEILING
+        variacaoBitcoin = df.format((((prices.values[lastPosition].y / prices.values[lastPosition - 1].y)-1) * 100))
         setCotacaoText()
 
         loadChart(prices)
@@ -135,7 +142,6 @@ class HomeFragment : Fragment() {
 
     private fun onCoinsSuccess(coin: CoinCurrencysDto) {
         currencysDto = coin
-//        Toast.makeText(this.context, coin.rates.BRL.toString(), Toast.LENGTH_LONG).show()
     }
 
     private fun onCoinsErrors() {
