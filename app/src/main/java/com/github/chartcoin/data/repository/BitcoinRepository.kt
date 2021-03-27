@@ -1,18 +1,18 @@
 package com.github.chartcoin.data.repository
 
-import com.github.chartcoin.api.service.retrofit.ApiServiceRetrofit
+import com.github.chartcoin.api.service.retrofit.ApiService
 import com.github.chartcoin.data.dto.BitcoinPricesDto
-import com.github.chartcoin.data.response.ApiResult
+import com.github.chartcoin.data.response.ApiResponse
 import java.lang.Exception
 
 class BitcoinRepository {
-    private val bitcoinService = ApiServiceRetrofit.bitcoinService()
+    private val bitcoinService = ApiService.bitcoinService()
 
-    suspend fun getPrices(): ApiResult<BitcoinPricesDto> {
+    suspend fun getPrices(): ApiResponse<BitcoinPricesDto> {
         return try {
             val response = bitcoinService.listBitcoinPrices()
 
-            ApiResult.Success(
+            ApiResponse.Success(
                 BitcoinPricesDto(
                     response.name,
                     response.unit,
@@ -20,7 +20,7 @@ class BitcoinRepository {
                 )
             )
         } catch (e: Exception) {
-            ApiResult.Error(e.message)
+            ApiResponse.Error(e.message)
         }
     }
 }

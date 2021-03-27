@@ -11,15 +11,13 @@ import androidx.lifecycle.Observer
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
-import com.github.aachartmodel.aainfographics.aachartcreator.aa_toAAOptions
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AATooltip
+import com.github.aachartmodel.aainfographics.aatools.AAColor
 import com.github.chartcoin.R
 import com.github.chartcoin.data.dto.BitcoinPricesDto
-import com.github.chartcoin.data.response.ApiResult
+import com.github.chartcoin.data.dto.CoinCurrencysDto
+import com.github.chartcoin.data.response.ApiResponse
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.NumberFormat
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import java.util.*
@@ -41,8 +39,16 @@ class HomeFragment : Fragment() {
 
         homeViewModel.prices.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
-                is ApiResult.Success -> onPricesResult(result.result)
-                is ApiResult.Error -> onPricesError()
+                is ApiResponse.Success -> onPricesResult(result.result)
+                is ApiResponse.Error -> onPricesError()
+            }
+        })
+
+        homeViewModel.coins.observe(viewLifecycleOwner, Observer {
+            result ->
+            when(result) {
+                is ApiResponse.Success -> onCoinsSuccess(result.result)
+                is ApiResponse.Error -> onCoinsErrors()
             }
         })
 
@@ -57,7 +63,12 @@ class HomeFragment : Fragment() {
         layoutChart.visibility = View.GONE
         refreshHome.isRefreshing = false
 
+        getCurrency()
         homeViewModel.getPrices()
+    }
+
+    private fun getCurrency() {
+        homeViewModel.getCurrencys()
     }
 
     private fun onPricesResult(prices: BitcoinPricesDto) {
@@ -83,6 +94,7 @@ class HomeFragment : Fragment() {
     private fun loadChart(prices: BitcoinPricesDto) {
         val formatterDate = DateTimeFormatter.ofPattern("dd/MM/yy")
         val chartModel: AAChartModel = AAChartModel()
+            .colorsTheme(arrayOf(AAColor.Orange))
             .chartType(AAChartType.Spline)
             .title("Variação de Bitcoins")
             .yAxisTitle("Valores")
@@ -98,5 +110,13 @@ class HomeFragment : Fragment() {
 
         layoutChart.visibility = View.VISIBLE
         aaChartView.aa_drawChartWithChartModel(chartModel)
+    }
+
+    private fun onCoinsSuccess(result: CoinCurrencysDto) {
+        Toast.makeText(this.context, result.rates.BRL.toString(), Toast.LENGTH_LONG).show()
+    }
+
+    private fun onCoinsErrors() {
+        Toast.makeText(this.context, "ERRO", Toast.LENGTH_LONG).show()
     }
 }

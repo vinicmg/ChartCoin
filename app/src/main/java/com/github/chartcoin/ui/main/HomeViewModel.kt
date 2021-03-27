@@ -4,19 +4,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.chartcoin.data.dto.BitcoinPricesDto
+import com.github.chartcoin.data.dto.CoinCurrencysDto
 import com.github.chartcoin.data.repository.BitcoinRepository
-import com.github.chartcoin.data.response.ApiResult
+import com.github.chartcoin.data.repository.CurrencyRepository
+import com.github.chartcoin.data.response.ApiResponse
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-    private val repository = BitcoinRepository()
+    private val repositoryBitcoin = BitcoinRepository()
+    private val repositoryCurrency = CurrencyRepository()
 
-    val prices = MutableLiveData<ApiResult<BitcoinPricesDto>>()
+    val prices = MutableLiveData<ApiResponse<BitcoinPricesDto>>()
+    val coins = MutableLiveData<ApiResponse<CoinCurrencysDto>>()
 
     fun getPrices() {
         viewModelScope.launch {
-            val result = repository.getPrices()
+            val result = repositoryBitcoin.getPrices()
             prices.postValue(result)
+        }
+    }
+
+    fun getCurrencys() {
+        viewModelScope.launch {
+            val result = repositoryCurrency.getCurrencys()
+            coins.postValue(result)
         }
     }
 }
