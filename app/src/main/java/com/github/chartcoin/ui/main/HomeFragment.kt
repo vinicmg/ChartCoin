@@ -27,6 +27,9 @@ class HomeFragment : Fragment() {
         ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
+    private var moeda : Double = 1.0
+    private var cotacaoAtual: Double = 0.0
+    private lateinit var currencysDto : CoinCurrencysDto
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,17 +47,35 @@ class HomeFragment : Fragment() {
             }
         })
 
-        homeViewModel.coins.observe(viewLifecycleOwner, Observer {
-            result ->
-            when(result) {
+        homeViewModel.coins.observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
                 is ApiResponse.Success -> onCoinsSuccess(result.result)
                 is ApiResponse.Error -> onCoinsErrors()
             }
         })
 
         refreshHome.setOnRefreshListener { this.getPrices() }
+        chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            moeda = when(checkedId) {
+                chipBRL.id -> currencysDto.rates.BRL
+                chipEUR.id -> currencysDto.rates.EUR
+                else -> currencysDto.rates.USD
+            }
+
+            setCotacaoText()
+        }
 
         getPrices()
+    }
+
+    private fun setCotacaoText() {
+        val formatCurrency = when(chipGroup.checkedChipId) {
+            chipBRL.id -> NumberFormat.getCurrencyInstance(Locale("PT", "BR"))
+            chipEUR.id -> NumberFormat.getCurrencyInstance(Locale("EN", "FR"))
+            else -> NumberFormat.getCurrencyInstance(Locale("US", "US"))
+        }
+
+        valorBitcoinDestaque.text = formatCurrency.format(cotacaoAtual * moeda)
     }
 
     private fun getPrices() {
@@ -74,8 +95,8 @@ class HomeFragment : Fragment() {
     private fun onPricesResult(prices: BitcoinPricesDto) {
         val lastPosition = prices.values.size - 1
 
-        val formatCurrency = NumberFormat.getCurrencyInstance(Locale("US", "US"))
-        valorBitcoinDestaque.text = formatCurrency.format(prices.values[lastPosition].y)
+        cotacaoAtual = prices.values[lastPosition].y
+        setCotacaoText()
 
         loadChart(prices)
 
@@ -112,11 +133,16 @@ class HomeFragment : Fragment() {
         aaChartView.aa_drawChartWithChartModel(chartModel)
     }
 
-    private fun onCoinsSuccess(result: CoinCurrencysDto) {
-        Toast.makeText(this.context, result.rates.BRL.toString(), Toast.LENGTH_LONG).show()
+    private fun onCoinsSuccess(coin: CoinCurrencysDto) {
+        currencysDto = coin
+//        Toast.makeText(this.context, coin.rates.BRL.toString(), Toast.LENGTH_LONG).show()
     }
 
     private fun onCoinsErrors() {
-        Toast.makeText(this.context, "ERRO", Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            this.context,
+            "Ocorreu um erro ao tentar buscar os dados!",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }

@@ -2,6 +2,9 @@
     <string name="app_name">ChartCoin</string>
     <string name="chartcoin_splash_name">ChartCoin</string>
     <string name="splash_screen_image">splash_screen_image</string>
-    <string name="bitcoin_defaultValue">U$ 0,00</string>
+    <string name="bitcoin_defaultValue">US$ 0,00</string>
     <string name="cotacao_atual">Cotação Atual</string>
+    <string name="usd">USD</string>
+    <string name="brl">BRL</string>
+    <string name="eur">EUR</string>
 </resources>
